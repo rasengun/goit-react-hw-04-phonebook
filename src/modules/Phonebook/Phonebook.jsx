@@ -11,16 +11,15 @@ const Phonebook = () => {
   });
   const [filter, setFilter] = useState('');
 
-  const contactsRef = useRef(contacts.lenght);
+  const firstRender = useRef(true);
 
   useEffect(() => {
-    if (contactsRef.current === contacts.length) {
+    if (firstRender.current) {
+      firstRender.current = false;
       return;
     }
 
     localStorage.setItem('my-contacts', JSON.stringify(contacts));
-
-    contactsRef.current = contacts.length;
   }, [contacts]);
 
   const onHandleSubmit = ({ name, number }) => {
